@@ -1,3 +1,8 @@
+import toolbizhubImg from '../assets/images/project_toolbizhub_1790751986259.jpg';
+import modernBusinessImg from '../assets/images/project_modern_business_1790751997948.jpg';
+import creativeLandingImg from '../assets/images/project_creative_landing_1790752008806.jpg';
+import portfolioShowcaseImg from '../assets/images/project_portfolio_showcase_1790752027440.jpg';
+
 export interface ProjectItem {
   id: string;
   number: string;
@@ -72,7 +77,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     category: 'Multi-Tools Platform & Web Application',
     description:
       'A modern multi-tools website that brings a collection of useful online tools together in one convenient platform. The project focuses on a clean interface, easy navigation, responsive design, and a smooth user experience across devices.',
-    image: '/src/assets/images/project_toolbizhub_1790751986259.jpg',
+    image: toolbizhubImg,
     liveUrl: 'https://toolbizhub.com',
     tags: ['Web Design', 'UI/UX', 'Responsive System', 'Multi-Tool Platform'],
     deliverables: ['UI/UX System', 'Interactive Dashboard', 'Responsive Layouts', 'Design Tokens'],
@@ -86,7 +91,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     category: 'Corporate Digital Identity & Experience',
     description:
       'A responsive business website designed with a clean and professional visual identity, focusing on clear content structure, strong calls-to-action, and an engaging user experience.',
-    image: '/src/assets/images/project_modern_business_1790751997948.jpg',
+    image: modernBusinessImg,
     tags: ['Brand Identity', 'Information Architecture', 'Editorial Typography', 'Responsive Design'],
     deliverables: ['Design System', 'Desktop & Mobile Prototypes', 'CTA Architecture', 'Visual Language'],
     overview:
@@ -99,7 +104,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     category: 'High-Impact Product & Studio Presentation',
     description:
       'A modern landing page concept focused on visual storytelling, strong typography, responsive layouts, and conversion-oriented user experience.',
-    image: '/src/assets/images/project_creative_landing_1790752008806.jpg',
+    image: creativeLandingImg,
     tags: ['Visual Storytelling', 'Landing Page Design', 'Conversion Strategy', 'Dynamic Motion'],
     deliverables: ['Hero Narrative', 'Bento Sectioning', 'Conversion Funnel', 'Figma Production'],
     overview:
@@ -112,7 +117,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     category: 'Futuristic 3D & Liquid Glass Showcase',
     description:
       'A personal portfolio experience designed to showcase creative work, skills, projects, and professional identity through a modern and interactive interface.',
-    image: '/src/assets/images/project_portfolio_showcase_1790752027440.jpg',
+    image: portfolioShowcaseImg,
     tags: ['3D Web Experiences', 'Liquid Glass System', 'Creative Direction', 'WebGL Interaction'],
     deliverables: ['Procedural 3D Scene', 'Custom Glassmorphism UI', 'Fluid Parallax', 'Full-Stack Portfolio'],
     overview:

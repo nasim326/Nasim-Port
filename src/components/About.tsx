@@ -1,5 +1,5 @@
-import React from 'react';
-import { Layers, Palette, Sparkles, CheckCircle2 } from 'lucide-react';
+import React, { useState } from 'react';
+import { Layers, Palette, Sparkles, CheckCircle2, User } from 'lucide-react';
 import { SITE_CONFIG } from '../config/site';
 import portraitImg from '../assets/images/nasim_sarwar_portrait_1790751974096.jpg';
 
@@ -8,6 +8,7 @@ interface AboutProps {
 }
 
 export const About: React.FC<AboutProps> = ({ scrollY }) => {
+  const [imgError, setImgError] = useState(false);
   return (
     <section
       id="about"
@@ -40,15 +41,24 @@ export const About: React.FC<AboutProps> = ({ scrollY }) => {
             <div className="absolute -inset-1 rounded-3xl bg-gradient-to-tr from-cyan-500/20 via-violet-500/20 to-blue-500/20 blur-xl opacity-50 group-hover:opacity-80 transition-opacity" />
 
             <div className="relative rounded-3xl p-3 liquid-glass overflow-hidden">
-              <div className="relative rounded-2xl overflow-hidden aspect-[4/5] bg-zinc-900 border border-white/10">
+              <div className="relative rounded-2xl overflow-hidden aspect-[4/5] bg-zinc-900 border border-white/10 flex items-center justify-center">
                 {/* Secondary portrait crop: centered studio close-up */}
-                <img
-                  src={portraitImg}
-                  alt="Nasim Sarwar Website Designer at work"
-                  className="w-full h-full object-cover object-center grayscale-[20%] contrast-[1.05] group-hover:grayscale-0 transition-all duration-700"
-                  loading="lazy"
-                  referrerPolicy="no-referrer"
-                />
+                {!imgError ? (
+                  <img
+                    src={portraitImg}
+                    alt="Nasim Sarwar Website Designer at work"
+                    className="w-full h-full object-cover object-center grayscale-[20%] contrast-[1.05] group-hover:grayscale-0 transition-all duration-700"
+                    loading="lazy"
+                    referrerPolicy="no-referrer"
+                    onError={() => setImgError(true)}
+                  />
+                ) : (
+                  <div className="w-full h-full p-8 flex flex-col items-center justify-center text-center bg-gradient-to-b from-blue-950/40 to-zinc-950">
+                    <User className="w-16 h-16 text-cyan-400/60 mb-3" />
+                    <p className="font-display font-bold text-lg text-white">Nasim Sarwar</p>
+                    <p className="text-xs text-zinc-400">Creative Website Designer</p>
+                  </div>
+                )}
                 
                 {/* Glass reflection gradient */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#08090C] via-transparent to-white/[0.04] pointer-events-none" />

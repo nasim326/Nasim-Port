@@ -1,5 +1,5 @@
-import React from 'react';
-import { ArrowDown, ArrowUpRight, Sparkles } from 'lucide-react';
+import React, { useState } from 'react';
+import { ArrowDown, ArrowUpRight, Sparkles, User } from 'lucide-react';
 import { SITE_CONFIG } from '../config/site';
 import { HeroScene } from './HeroScene';
 import portraitImg from '../assets/images/nasim_sarwar_portrait_1790751974096.jpg';
@@ -9,6 +9,7 @@ interface HeroProps {
 }
 
 export const Hero: React.FC<HeroProps> = ({ scrollY }) => {
+  const [imgError, setImgError] = useState(false);
   const scrollTo = (id: string) => {
     const el = document.querySelector(id);
     if (el) {
@@ -133,14 +134,23 @@ export const Hero: React.FC<HeroProps> = ({ scrollY }) => {
               <div className="absolute inset-0 bg-gradient-to-b from-white/[0.12] via-transparent to-black/40 pointer-events-none" />
 
               {/* Portrait Image Frame */}
-              <div className="relative rounded-[1.6rem] overflow-hidden aspect-[3/4] bg-[#0c0e14] border border-white/10 shadow-inner">
-                <img
-                  src={portraitImg}
-                  alt="Nasim Sarwar — Website Designer portrait"
-                  className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
-                  loading="eager"
-                  referrerPolicy="no-referrer"
-                />
+              <div className="relative rounded-[1.6rem] overflow-hidden aspect-[3/4] bg-[#0c0e14] border border-white/10 shadow-inner flex items-center justify-center">
+                {!imgError ? (
+                  <img
+                    src={portraitImg}
+                    alt="Nasim Sarwar — Website Designer portrait"
+                    className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                    loading="eager"
+                    referrerPolicy="no-referrer"
+                    onError={() => setImgError(true)}
+                  />
+                ) : (
+                  <div className="w-full h-full p-8 flex flex-col items-center justify-center text-center bg-gradient-to-b from-cyan-950/40 to-zinc-950">
+                    <User className="w-16 h-16 text-cyan-400/60 mb-4" />
+                    <p className="font-display font-bold text-lg text-white">Nasim Sarwar</p>
+                    <p className="text-xs text-cyan-300">Website Designer</p>
+                  </div>
+                )}
 
                 {/* Subtle bottom gradient scrim to ground portrait */}
                 <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#050608]/90 via-[#050608]/30 to-transparent pointer-events-none" />

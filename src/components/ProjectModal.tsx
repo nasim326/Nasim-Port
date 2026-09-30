@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { X, ExternalLink, Check, Sparkles } from 'lucide-react';
 import { ProjectItem } from '../config/site';
 
@@ -8,6 +8,12 @@ interface ProjectModalProps {
 }
 
 export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
+  const [imgError, setImgError] = useState(false);
+
+  useEffect(() => {
+    setImgError(false);
+  }, [project]);
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -61,14 +67,23 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
         </h3>
 
         {/* Project Visual Showcase */}
-        <div className="relative rounded-2xl overflow-hidden aspect-[16/9] mb-8 border border-white/10 shadow-2xl bg-zinc-900">
-          <img
-            src={project.image}
-            alt={`${project.title} detailed visual presentation`}
-            className="w-full h-full object-cover"
-            loading="lazy"
-            referrerPolicy="no-referrer"
-          />
+        <div className="relative rounded-2xl overflow-hidden aspect-[16/9] mb-8 border border-white/10 shadow-2xl bg-zinc-900 flex items-center justify-center">
+          {!imgError ? (
+            <img
+              src={project.image}
+              alt={`${project.title} detailed visual presentation`}
+              className="w-full h-full object-cover"
+              loading="lazy"
+              referrerPolicy="no-referrer"
+              onError={() => setImgError(true)}
+            />
+          ) : (
+            <div className="w-full h-full p-8 flex flex-col items-center justify-center text-center bg-gradient-to-br from-cyan-950/40 via-zinc-900 to-violet-950/40">
+              <Sparkles className="w-8 h-8 text-cyan-400 mb-3" />
+              <span className="font-mono text-xs uppercase tracking-widest text-cyan-400 mb-2">{project.category}</span>
+              <span className="font-display font-bold text-2xl text-white">{project.title}</span>
+            </div>
+          )}
           <div className="absolute inset-0 bg-gradient-to-t from-[#090b10]/80 via-transparent to-transparent pointer-events-none" />
         </div>
 

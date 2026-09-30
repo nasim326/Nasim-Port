@@ -13,6 +13,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onSelect }) =
   const [rotateY, setRotateY] = useState(0);
   const [glarePos, setGlarePos] = useState({ x: 50, y: 50 });
   const [isHovered, setIsHovered] = useState(false);
+  const [imgError, setImgError] = useState(false);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
@@ -94,14 +95,22 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onSelect }) =
       </div>
 
       {/* Project Mockup Visual Container */}
-      <div className="relative rounded-2xl overflow-hidden aspect-[16/10] bg-zinc-950 border border-white/10 mb-6 shadow-inner">
-        <img
-          src={project.image}
-          alt={`${project.title} presentation preview`}
-          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
-          loading="lazy"
-          referrerPolicy="no-referrer"
-        />
+      <div className="relative rounded-2xl overflow-hidden aspect-[16/10] bg-zinc-950 border border-white/10 mb-6 shadow-inner flex items-center justify-center">
+        {!imgError ? (
+          <img
+            src={project.image}
+            alt={`${project.title} presentation preview`}
+            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+            loading="lazy"
+            referrerPolicy="no-referrer"
+            onError={() => setImgError(true)}
+          />
+        ) : (
+          <div className="w-full h-full p-6 flex flex-col items-center justify-center text-center bg-gradient-to-br from-cyan-950/30 to-violet-950/30">
+            <span className="font-mono text-xs uppercase tracking-widest text-cyan-400 mb-1">{project.category}</span>
+            <span className="font-display font-bold text-lg text-white">{project.title}</span>
+          </div>
+        )}
         {/* Subtle glass overlay reflection */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#050608]/80 via-transparent to-transparent pointer-events-none" />
       </div>
